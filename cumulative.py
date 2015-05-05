@@ -1,7 +1,7 @@
 import numpy as np
 
-
-def cumulative (vector, min, max, step, filename) :
+#funzione che calcola la cumulativa e la scrive in un file
+def cumulative (vector, min, max, step) :
     my_range=np.arange(min,max,step)
     Cnorm=np.zeros(my_range.size)
     C=np.zeros(my_range.size)
@@ -18,4 +18,4 @@ def cumulative (vector, min, max, step, filename) :
     C[-1]=S
     Nnorm=np.divide(N,S)
     Cnorm=np.divide(C,S)
-    ascii.write([my_range,N,C,Nnorm,Cnorm], filename, format='fixed_width', delimiter=' ')
+    return [my_range,N,C,Nnorm,Cnorm]
