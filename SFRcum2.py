@@ -13,6 +13,8 @@ NMassGRBmeno3=ascii.read('NMassGRBmeno3.dat')
 print "done reading files"
 print "size",datacum['col4'].size
 
+KS=[]
+
 nutil=0
 while nutil < 1000:
     mass_distr=[]
@@ -58,8 +60,14 @@ while nutil < 1000:
         print fname, " S = ",  S
         ascii.write([my_range,N,C,Nnorm,Cnorm], fname, format='fixed_width', delimiter=' ')
         nutil=nutil+1
+        
+        ks_test=scipy.stats.ks_2samp(NmassGRB['col4'],Cnorm)
+        
+        KS.append(ks_test)
+        
     else :
         print "rejecting"
+
 
 
 
