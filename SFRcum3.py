@@ -37,8 +37,8 @@ for stub in stub_file:
             KS_p.append(ks_test_plain[1])
 
     # calcola le cumulative
-    cumul_KS_d=cumulative(KS_d, 0,1,0.1)  # <<<<<<<<<<<<<<<<<< REPLACE ME
-    cumul_KS_p=cumulative(KS_p, 0,1,0.1)  # <<<<<<<<<<<<<<<<<< REPLACE ME
+    cumul_KS_d=cumulative(KS_d, 0, 1, 0.1)  # <<<<<<<<<<<<<<<<<< REPLACE ME
+    cumul_KS_p=cumulative(KS_p, 0, 1, 0.1)  # <<<<<<<<<<<<<<<<<< REPLACE ME
     
     # scrivile
     ascii.write(cumul_KS_d, stub+"KS_d.dat", format='fixed_width', delimiter=' ')
