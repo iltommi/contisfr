@@ -21,7 +21,7 @@ print "done reading files"
 nutil=0
 failed=0
 
-np.set_printoptions(precision=3, linewidth=10000)
+np.set_printoptions(precision=3, linewidth=inf)
 
 KS_d_plain=[]
 KS_p_plain=[]
