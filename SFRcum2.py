@@ -23,7 +23,7 @@ print "done reading files"
 nutil=0
 failed=0
 
-np.set_printoptions(precision=3)
+np.set_printoptions(precision=3, linewidth=10000)
 
 KS_d_plain=[]
 KS_p_plain=[]
@@ -77,7 +77,10 @@ while nutil < 10:
                 
     # scrivi qualcosa che fa fico
     if len(rejected) > 0: 
-        print "rejected = ", np.array(rejected)
+        print "rejected = ", 
+        for rej in rejected:
+            print np.array(rej) ,
+        print ""
     else:
         print "ok"
     # metti in ordine la scrivania!
