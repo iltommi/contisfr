@@ -23,28 +23,36 @@ while nutil < 1000:
     # tira numeri a caso finche' non arrivi a 13
     while n_number_good < 13:
         randVal=random.random() # numero a caso
-        # guarda tra tutti i valori della col4 ...
-        for j in range(datacum['col4'].size-1):
-            # ... e trova il j per cui randVal sta bello bello in mezzo
-            if datacum['col4'][j] <= randVal and randVal < datacum['col4'][j+1]: 
-                #inizializza un vettore vuoto dove metteremo tutti gli fr_med uguali a datacum['col0'][j]
-                vals=[] 
-                # tra tutte le sfr_med ... 
-                for n in range(data['sfr_med'].size) : 
-                     # prendi quelle che sono uguali a quello trovato
-                    if abs(data['sfr_med'][n] - datacum['col0'][j]) < 0.005:
-                        vals.append(data['mass_med'][n])
+        # controlliamo se j e' piu' grande dell'ultima, prendiamo l'ultima
+        valFound=0
+        if (randVal > datacum['col4'][-1]):
+            valFound=datacum['col0'][-1]
+        else:
+            # guarda tra tutti i valori della col4 ...
+            for j in range(datacum['col4'].size-1):
+                # ... e trova il j per cui randVal sta bello bello in mezzo
+                if datacum['col4'][j] <= randVal and randVal < datacum['col4'][j+1]: 
+                    valFound=datacum['col0'][j]
+            
+        
+        #inizializza un vettore vuoto dove metteremo tutti gli sfr_med +- uguali a valFound
+        vals=[] 
+        # tra tutte le sfr_med ... 
+        for n in range(data['sfr_med'].size) : 
+             # prendi quelle che sono uguali a quello trovato
+            if abs(data['sfr_med'][n] - valFound) < 0.005:
+                vals.append(data['mass_med'][n])
 
-                # eh beh non sempre te le trovi ...
-                if len(vals) == 0: 
-                    rejected.append((randVal, datacum['col4'][j], datacum['col0'][j]))
-                else: 
-                    # ... ma spesso si'
-                    n_number_good+=1
-                    # prendi un numero a caso 
-                    nth=random.randrange(0,len(vals)) 
-                    # e aggiungilo al vettore mass_distr
-                    mass_distr.append(vals[nth])
+        # eh beh non sempre te le trovi ...
+        if len(vals) == 0: 
+            rejected.append((randVal,valFound))
+        else: 
+            # ... ma spesso si'
+            n_number_good+=1
+            # prendi un numero a caso 
+            nth=random.randrange(0,len(vals)) 
+            # e aggiungilo al vettore mass_distr
+            mass_distr.append(vals[nth])
                 
                 
     # scrivi qualcosa che fa fico
