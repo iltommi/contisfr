@@ -12,6 +12,7 @@ print "done reading files"
 
 nutil=0
 failed=0
+
 while nutil < 1000:
     mass_distr=[]
     n_number_good=0
@@ -31,20 +32,21 @@ while nutil < 1000:
                 # tra tutte le sfr_med ... 
                 for n in range(data['sfr_med'].size) : 
                      # prendi quelle che sono uguali a quello trovato
-                    if data['sfr_med'][n] == datacum['col0'][j]:
+                    if abs(data['sfr_med'][n] - datacum['col0'][j]) < 0.005:
                         vals.append(data['mass_med'][n])
 
                 # eh beh non sempre te le trovi ...
                 if len(vals) == 0: 
-                    rejected.append((datacum['col4'][j],datacum['col0'][j]))
+                    rejected.append((randVal, datacum['col4'][j], datacum['col0'][j]))
                 else: 
                     # ... ma spesso si'
                     n_number_good+=1
                     # prendi un numero a caso 
                     nth=random.randrange(0,len(vals)) 
                     # e aggiungilo al vettore mass_distr
-                    mass_distr.append(vals[nth]) 
-    
+                    mass_distr.append(vals[nth])
+                
+                
     # scrivi qualcosa che fa fico
     if len(rejected) > 0: 
         print "rejected = ", rejected
@@ -67,7 +69,6 @@ while nutil < 1000:
 
     nutil += 1
     
-
 print "failed times: ", failed
 
 
