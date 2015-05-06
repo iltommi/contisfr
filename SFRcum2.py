@@ -26,7 +26,7 @@ while nutil < 1000:
         randVal=random.random() # numero a caso
         # controlliamo se j e' piu' grande dell'ultima, prendiamo l'ultima
         valFound=0
-        if (randVal > datacum['col4'][-1]):
+        if (randVal >= datacum['col4'][-1]):
             valFound=datacum['col0'][-1]
         else:
             # guarda tra tutti i valori della col4 ...
