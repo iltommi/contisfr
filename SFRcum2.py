@@ -15,6 +15,10 @@ NMassGRBmeno3=ascii.read('NMassGRBmeno3.dat')
 masseGRB=ascii.read('masse_recap_2aprile_Lk22mai.txt')
 masseGRB8p64=ascii.read('masse_recap_2aprile_Lk22mai8p64.txt')
 
+
+masseGRB.sort(["Mass"]) 
+masseGRB8p64.sort(["Mass"]) 
+
 #NMassGRBcut8p65=ascii.read('NmassGRBcut8p65.dat')
 
 
@@ -23,14 +27,14 @@ print "done reading files"
 nutil=0
 failed=0
 
-
+np.set_printoptions(precision=3, linewidth=10000)
 
 KS_d_plain=[]
 KS_p_plain=[]
 KS_d_clean=[]
 KS_p_clean=[]
 
-while nutil < 1000:
+while nutil < 100:
     mass_distr=[]
     n_number_good=0
     rejected=[]
@@ -38,7 +42,7 @@ while nutil < 1000:
     sys.stdout.write("case "+nutil_str+" : ")
     
     # tira numeri a caso finche' non arrivi a 13
-    while n_number_good < 11:
+    while n_number_good < 16:
         randVal=random.random() # numero a caso
         # controlliamo se j e' piu' grande dell'ultima, prendiamo l'ultima
         valFound=0
@@ -57,7 +61,7 @@ while nutil < 1000:
         # tra tutte le sfr_med ... 
         for n in range(data['sfr_med'].size) : 
              # prendi quelle che sono uguali a quello trovato
-            if abs(data['sfr_med'][n] - valFound) < 0.005:
+            if abs(data['sfr_med'][n] - valFound) < 0.05:
                 vals.append(data['mass_med'][n])
 
         # eh beh non sempre te le trovi ...
@@ -77,12 +81,15 @@ while nutil < 1000:
                 
     # scrivi qualcosa che fa fico
     if len(rejected) > 0: 
-        print "rejected = ", rejected
+        print "rejected = ", 
+        for rej in rejected:
+            print np.array(rej) ,
+        print ""
     else:
         print "ok"
     # metti in ordine la scrivania!
     mass_distr.sort()
-    print mass_distr
+    print np.array(mass_distr)
     # e togli i due piu' grossi
     mass_distr_clean=mass_distr[0:-2]
 
@@ -90,7 +97,7 @@ while nutil < 1000:
     ks_test_plain = scipy.stats.ks_2samp(masseGRB['Mass'],mass_distr)
     KS_d_plain.append(ks_test_plain[0])
     KS_p_plain.append(ks_test_plain[1])
-    ks_test_clean = scipy.stats.ks_2samp(masseGRB8p64['Mass'],mass_distr_clean)
+    ks_test_clean = scipy.stats.ks_2samp(masseGRB['Mass'],mass_distr_clean)
     KS_d_clean.append(ks_test_clean[0])
     KS_p_clean.append(ks_test_clean[1])
     
@@ -112,7 +119,7 @@ allData=[KS_d_plain, KS_p_plain, KS_d_clean, KS_p_clean]
 
 for data in allData:
     test_good = sum(1 if x > 0.01 else 0 for x in data)
-    print "KS",data.__name__, test_good
+    print "KS ", test_good
 
 ascii.write(allData, 'KS.dat', format='fixed_width', delimiter=' ')
 
