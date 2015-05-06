@@ -12,7 +12,7 @@ def cumulative (vector, min, max, step) :
     for j in range(my_range.size):
         for i in range(len(vector)):
             if my_range[j]<=vector[i] and vector[i]<my_range[j]+step:
-                N[j]+=1
+                N[j]+=10**(vector[i])
             if j>0:
                 C[j]=N[j]+C[j-1]
     

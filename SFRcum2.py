@@ -13,7 +13,7 @@ print "done reading files"
 nutil=0
 failed=0
 
-while nutil < 1000:
+while nutil < 10:
     mass_distr=[]
     n_number_good=0
     rejected=[]
@@ -44,7 +44,8 @@ while nutil < 1000:
                 vals.append(data['mass_med'][n])
 
         # eh beh non sempre te le trovi ...
-        if len(vals) == 0: 
+        if len(vals) == 0:
+            failed += 1 
             rejected.append((randVal,valFound))
         else: 
             # ... ma spesso si'
@@ -62,16 +63,19 @@ while nutil < 1000:
         print "ok"
     # metti in ordine la scrivania!
     mass_distr.sort()
+    print mass_distr
     # e togli i due piu' grossi
     mass_distr_clean=mass_distr[0:-2]
 
     #calcola le due cumulative
-    cumul_plain=cumulative(mass_distr, 8.6,11.7,0.1)
-    cumul_clean=cumulative(mass_distr_clean, 8.6,11.7,0.1)
+#    cumul_plain=cumulative(mass_distr, 8.6,13.0,0.1)
+#    cumul_clean=cumulative(mass_distr_clean, 8.6,13.0,0.1)
     
     # e scrivile
-    ascii.write(cumul_plain, 'cumul_plain'+nutil_str+'.dat', format='fixed_width', delimiter=' ')
-    ascii.write(cumul_clean, 'cumul_clean'+nutil_str+'.dat', format='fixed_width', delimiter=' ')
+#    ascii.write(cumul_plain, 'cumul_plain'+nutil_str+'.dat', format='fixed_width', delimiter=' ')
+#    ascii.write(cumul_clean, 'cumul_clean'+nutil_str+'.dat', format='fixed_width', delimiter=' ')
+    ascii.write(mass_distr, 'mass_distr'+nutil_str+'.dat', format='fixed_width', delimiter=' ')
+    ascii.write(mass_distr_clean, 'mass_distr_clean'+nutil_str+'.dat', format='fixed_width', delimiter=' ')
 
     
 
