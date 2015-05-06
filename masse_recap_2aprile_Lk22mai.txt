@@ -1,0 +1,27 @@
+   GRB		  z			  Mass			err_inf		err_sup			Bell		+old          L_K    MJ         MK
+   081007    0.5295      0.878078E+01  0.833356E+01  0.925271E+01 8.9705421	8.5186228 2.78E+001  -18.104  -17.906  
+   071112    0.8230      0.888802E+01  0.871021E+01  0.904480E+01 9.4433857	9.1582835 2.83E+001  -19.202  -19.040
+   090424    0.5440      0.938107E+01  0.919062E+01  0.955507E+01 10.099925	9.3563420 2.89E+001  -20.798  -20.744
+   091018    0.9710      0.952447E+01  0.942332E+01  0.960578E+01 10.166626	9.6468646 2.90E+001  -21.096  -20.868
+   080916    0.6890      0.898427E+01  0.890058E+01  0.904833E+01 9.6081738	9.0873528 2.84E+001  -19.751  -19.511
+   080430    0.7670      0.815383E+01  0.795728E+01  0.827300E+01 8.9881068	8.2406611 2.78E+001  -18.304  -18.010
+   060912    0.9370      0.923294E+01  0.916247E+01  0.929322E+01 10.393456	9.2939392 2.92E+001  -21.598  -21.451
+   100621    0.5420      0.904379E+01  0.899311E+01  0.909600E+01 10.095828	9.0416950 2.90E+001  -20.987  -20.781
+   091127    0.4900      0.867151E+01  0.860178E+01  0.874021E+01 9.2340858	8.6772941 2.81E+001  -18.869  -18.635
+   060614    0.1250      0.809293E+01  0.792521E+01  0.824140E+01 8.4381901	8.1917764 2.72E+001  -16.649  -16.504
+   050416    0.6535      0.917260E+01  0.905890E+01  0.929276E+01 9.8513429	9.2077947 2.86E+001  -20.128  -20.017
+#   050525    0.6060      0.809929E+01  0.752981E+01  0.876472E+01 9.2475076	8.1491737 2.80E+001  -18.121  -18.377
+#   061021    0.3463      0.848232E+01  0.796381E+01  0.909899E+01 8.7659415	8.6480162 2.76E+001  -17.396  -17.290
+#   080319    0.9370      0.812423E+01  0.776320E+01  0.850743E+01 8.6497875	8.0878788 2.74E+001  -17.281  -17.028
+
+# commenti vari: 
+# 050525: la SED è praticamente inutilizzabile perché ci sono pochi valori e con degli #errori enormi
+# 080319B: formalmente non si può dire niente sulla massa perché la SED è fatta con 3 #punti che non coprono niente al di là del Balmer break
+# 061021: anche qui i punti fotometrici non permetterebbero di avere una stima sensata #sulla massa, ma si può ricavare un limite dal limite Spitzer (non l'ho ancora fatto)
+# Bell: stellar mass determined with the Bell method. It's much solid than the SED BUT it #is for z=0 very bright galaxies. Hence, it's a very solid upper limit for us, buth I #don't know how we can use it (and if we should)
+#+old: it's the stellar mass values INCLUDING a possible old population. As you can see it #does not have any influence.
+#Both the Bell and the +old will have revised values tomorrow but not changing #significantly.
+
+  
+ 
+
