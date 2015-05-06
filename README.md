@@ -3,7 +3,7 @@ contisfr
 
 un po' di script per analisi dati
 
-Rationale
+Recipe
 ---------
 
     git clone https://github.com/iltommi/contisfr.git
