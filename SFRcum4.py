@@ -64,10 +64,13 @@ while nutil < 100:
     ks_test_plain = scipy.stats.ks_2samp(masseGRB['Mass'],mass_distr)
     KS_d_plain.append(ks_test_plain[0])
     KS_p_plain.append(ks_test_plain[1])
+    ks_test_clean = scipy.stats.ks_2samp(masseGRB['Mass'],mass_distr_clean)
+    KS_d_clean.append(ks_test_clean[0])
+    KS_p_clean.append(ks_test_clean[1])
     
     nutil += 1
 
-allData=[KS_d_plain, KS_p_plain]
+allData=[KS_d_plain, KS_p_plain, KS_d_clean, KS_p_clean]
 
 for data in allData:
     test_good = sum(1 if x > 0.01 else 0 for x in data)
