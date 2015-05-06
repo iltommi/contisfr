@@ -13,6 +13,8 @@ datacum=ascii.read('SFRcum.dat')
 NmassGRB=ascii.read('NmassGRB.dat')
 NMassGRBmeno3=ascii.read('NMassGRBmeno3.dat')
 masseGRB=ascii.read('masse_recap_2aprile_Lk22mai.txt')
+masseGRB8p64=ascii.read('masse_recap_2aprile_Lk22mai8p64.txt')
+
 #NMassGRBcut8p65=ascii.read('NmassGRBcut8p65.dat')
 
 
@@ -28,7 +30,7 @@ KS_p_plain=[]
 KS_d_clean=[]
 KS_p_clean=[]
 
-while nutil < 10:
+while nutil < 1000:
     mass_distr=[]
     n_number_good=0
     rejected=[]
@@ -36,7 +38,7 @@ while nutil < 10:
     sys.stdout.write("case "+nutil_str+" : ")
     
     # tira numeri a caso finche' non arrivi a 13
-    while n_number_good < 13:
+    while n_number_good < 11:
         randVal=random.random() # numero a caso
         # controlliamo se j e' piu' grande dell'ultima, prendiamo l'ultima
         valFound=0
@@ -88,7 +90,7 @@ while nutil < 10:
     ks_test_plain = scipy.stats.ks_2samp(masseGRB['Mass'],mass_distr)
     KS_d_plain.append(ks_test_plain[0])
     KS_p_plain.append(ks_test_plain[1])
-    ks_test_clean = scipy.stats.ks_2samp(masseGRB['Mass'],mass_distr_clean)
+    ks_test_clean = scipy.stats.ks_2samp(masseGRB8p64['Mass'],mass_distr_clean)
     KS_d_clean.append(ks_test_clean[0])
     KS_p_clean.append(ks_test_clean[1])
     
