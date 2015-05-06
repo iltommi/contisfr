@@ -13,6 +13,8 @@ datacum=ascii.read('SFRcum.dat')
 NmassGRB=ascii.read('NmassGRB.dat')
 NMassGRBmeno3=ascii.read('NMassGRBmeno3.dat')
 masseGRB=ascii.read('masse_recap_2aprile_Lk22mai.txt')
+
+masseGRB.sort(["Mass"]) 
 #NMassGRBcut8p65=ascii.read('NmassGRBcut8p65.dat')
 
 
@@ -21,7 +23,7 @@ print "done reading files"
 nutil=0
 failed=0
 
-
+np.set_printoptions(precision=3)
 
 KS_d_plain=[]
 KS_p_plain=[]
@@ -75,12 +77,12 @@ while nutil < 10:
                 
     # scrivi qualcosa che fa fico
     if len(rejected) > 0: 
-        print "rejected = ", rejected
+        print "rejected = ", np.array(rejected)
     else:
         print "ok"
     # metti in ordine la scrivania!
     mass_distr.sort()
-    print mass_distr
+    print np.array(mass_distr)
     # e togli i due piu' grossi
     mass_distr_clean=mass_distr[0:-2]
 
@@ -110,7 +112,7 @@ allData=[KS_d_plain, KS_p_plain, KS_d_clean, KS_p_clean]
 
 for data in allData:
     test_good = sum(1 if x > 0.01 else 0 for x in data)
-    print "KS",data.__name__, test_good
+    print "KS ", test_good
 
 ascii.write(allData, 'KS.dat', format='fixed_width', delimiter=' ')
 
