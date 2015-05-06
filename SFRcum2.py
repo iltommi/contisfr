@@ -13,7 +13,9 @@ print "done reading files"
 nutil=0
 failed=0
 
-while nutil < 10:
+
+
+while nutil < 1000:
     mass_distr=[]
     n_number_good=0
     rejected=[]
@@ -25,7 +27,7 @@ while nutil < 10:
         randVal=random.random() # numero a caso
         # controlliamo se j e' piu' grande dell'ultima, prendiamo l'ultima
         valFound=0
-        if (randVal > datacum['col4'][-1]):
+        if (randVal >= datacum['col4'][-1]):
             valFound=datacum['col0'][-1]
         else:
             # guarda tra tutti i valori della col4 ...
@@ -45,7 +47,9 @@ while nutil < 10:
 
         # eh beh non sempre te le trovi ...
         if len(vals) == 0:
-            failed += 1 
+
+            failed += 1
+
             rejected.append((randVal,valFound))
         else: 
             # ... ma spesso si'
