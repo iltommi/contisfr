@@ -13,6 +13,7 @@ print "done reading files"
 nutil=0
 failed=0
 
+
 while nutil < 1000:
     mass_distr=[]
     n_number_good=0
@@ -44,7 +45,8 @@ while nutil < 1000:
                 vals.append(data['mass_med'][n])
 
         # eh beh non sempre te le trovi ...
-        if len(vals) == 0: 
+        if len(vals) == 0:
+            failed += 1
             rejected.append((randVal,valFound))
         else: 
             # ... ma spesso si'
