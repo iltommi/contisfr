@@ -36,7 +36,7 @@ while nutil < 1000:
 
                 # eh beh non sempre te le trovi ...
                 if len(vals) == 0: 
-                    rejected.append(datacum['col0'][j])
+                    rejected.append((datacum['col4'][j],datacum['col0'][j]))
                 else: 
                     # ... ma spesso si'
                     n_number_good+=1
@@ -48,7 +48,8 @@ while nutil < 1000:
     # scrivi qualcosa che fa fico
     if len(rejected) > 0: 
         print "rejected = ", rejected
-    
+    else:
+        print "ok"
     # metti in ordine la scrivania!
     mass_distr.sort()
     # e togli i due piu' grossi
