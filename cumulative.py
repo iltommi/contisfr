@@ -18,7 +18,8 @@ def cumulative (vector, min, max, step) :
     
     S=np.sum(N)
     
-    print S, len(vector)
+    if int(S) != len(vector):
+        print "cumulative left out ", len(vector) - int(S), "/", len(vector)
 
     Nnorm=np.divide(N,S)
     Cnorm=np.divide(C,S)

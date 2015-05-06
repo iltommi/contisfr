@@ -46,7 +46,8 @@ while nutil < 1000:
                     mass_distr.append(vals[nth]) 
     
     # scrivi qualcosa che fa fico
-    print "reject = ", rejected
+    if len(rejected) > 0: 
+        print "rejected = ", rejected
     
     # metti in ordine la scrivania!
     mass_distr.sort()
