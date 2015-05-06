@@ -2,11 +2,19 @@ from astropy.io import ascii
 import numpy as np
 import random 
 import sys
+import scipy.stats
+
 
 execfile('cumulative.py')        
 
 data=ascii.read('cat0p5z0p8_klt24_ilt25p5_SSFR_masscut8p64_0p50p7_sortSFR.dat')
 datacum=ascii.read('SFRcum.dat')
+
+NmassGRB=ascii.read('NmassGRB.dat')
+NMassGRBmeno3=ascii.read('NMassGRBmeno3.dat')
+masseGRB=ascii.read('masse_recap_2aprile_Lk22mai.txt')
+#NMassGRBcut8p65=ascii.read('NmassGRBcut8p65.dat')
+
 
 print "done reading files"
 
@@ -15,7 +23,12 @@ failed=0
 
 
 
-while nutil < 1000:
+KS_d_plain=[]
+KS_p_plain=[]
+KS_d_clean=[]
+KS_p_clean=[]
+
+while nutil < 10:
     mass_distr=[]
     n_number_good=0
     rejected=[]
@@ -71,20 +84,36 @@ while nutil < 1000:
     # e togli i due piu' grossi
     mass_distr_clean=mass_distr[0:-2]
 
-    #calcola le due cumulative
-#    cumul_plain=cumulative(mass_distr, 8.6,13.0,0.1)
-#    cumul_clean=cumulative(mass_distr_clean, 8.6,13.0,0.1)
+
+    ks_test_plain = scipy.stats.ks_2samp(masseGRB['Mass'],mass_distr)
+    KS_d_plain.append(ks_test_plain[0])
+    KS_p_plain.append(ks_test_plain[1])
+    ks_test_clean = scipy.stats.ks_2samp(masseGRB['Mass'],mass_distr_clean)
+    KS_d_clean.append(ks_test_clean[0])
+    KS_p_clean.append(ks_test_clean[1])
     
-    # e scrivile
-#    ascii.write(cumul_plain, 'cumul_plain'+nutil_str+'.dat', format='fixed_width', delimiter=' ')
-#    ascii.write(cumul_clean, 'cumul_clean'+nutil_str+'.dat', format='fixed_width', delimiter=' ')
-    ascii.write(mass_distr, 'mass_distr'+nutil_str+'.dat', format='fixed_width', delimiter=' ')
-    ascii.write(mass_distr_clean, 'mass_distr_clean'+nutil_str+'.dat', format='fixed_width', delimiter=' ')
+#     #calcola le due cumulative
+# #    cumul_plain=cumulative(mass_distr, 8.6,13.0,0.1)
+# #    cumul_clean=cumulative(mass_distr_clean, 8.6,13.0,0.1)
+#     
+#     # e scrivile
+# #    ascii.write(cumul_plain, 'cumul_plain'+nutil_str+'.dat', format='fixed_width', delimiter=' ')
+# #    ascii.write(cumul_clean, 'cumul_clean'+nutil_str+'.dat', format='fixed_width', delimiter=' ')
+#     ascii.write(mass_distr, 'mass_distr'+nutil_str+'.dat', format='fixed_width', delimiter=' ')
+#     ascii.write(mass_distr_clean, 'mass_distr_clean'+nutil_str+'.dat', format='fixed_width', delimiter=' ')
 
     
 
     nutil += 1
-    
+
+allData=[KS_d_plain, KS_p_plain, KS_d_clean, KS_p_clean]
+
+for data in allData:
+    test_good = sum(1 if x > 0.01 else 0 for x in data)
+    print "KS",data.__name__, test_good
+
+ascii.write(allData, 'KS.dat', format='fixed_width', delimiter=' ')
+
 print "failed times: ", failed
 
 
